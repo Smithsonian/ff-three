@@ -127,8 +127,14 @@ export default class GPUPicker
         viewport.applyPickViewport(pickTexture, event);
         renderer.setRenderTarget(pickTexture);
         renderer.setClearColor(0);
-        renderer.clear();
+
+        const xrFlag = renderer.xr.enabled;
+        renderer.xr.enabled = false;
+
+        renderer.clear(); 
         renderer.render(scene, camera);
+        
+        renderer.xr.enabled = xrFlag;
 
         renderer.setRenderTarget(null);
         renderer.setClearColor(color);
