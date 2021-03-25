@@ -93,7 +93,7 @@ const math = {
         _euler.setFromRotationMatrix(matrix, "ZYX");
         _euler.toVector3(orientationOut);
 
-        _mat4.getInverse(matrix);
+        _mat4.copy(matrix).invert();
         _vec4a.set(0, 0, 0, 1);
         _vec4a.applyMatrix4(_mat4);
 

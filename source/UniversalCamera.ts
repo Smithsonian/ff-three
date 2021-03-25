@@ -243,7 +243,7 @@ export default class UniversalCamera extends Camera
             this.projectionMatrix.makePerspective(left, left + width, top, top - height, near, far);
         }
 
-        (this as any).projectionMatrixInverse.getInverse(this.projectionMatrix);
+        (this as any).projectionMatrixInverse.copy(this.projectionMatrix).invert();
     }
 
     copy(source: this, recursive: boolean)
