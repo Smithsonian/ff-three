@@ -25,16 +25,16 @@ export default class HTMLSpriteGroup extends Object3D
 
     private _visible = true;
 
-    get visible() {
+    getVisible() {
         return this._visible;
     }
-    set visible(visible: boolean) {
+    setVisible(visible: boolean) {
         if (visible !== this._visible) {
             this._visible = visible;
 
             const children = this.children as HTMLSprite[];
             for (let i = 0, n = children.length; i < n; ++i) {
-                children[i].visible = visible;
+                children[i].setVisible(visible);
             }
         }
     }

@@ -48,10 +48,10 @@ export default class HTMLSprite extends Object3D
         this.frustumCulled = false;
     }
 
-    get visible() {
+    getVisible() {
         return this._visible;
     }
-    set visible(visible: boolean) {
+    setVisible(visible: boolean) {
         if (visible !== this._visible && this._elements) {
             this._visible = visible;
             this._elements.forEach(element => {
