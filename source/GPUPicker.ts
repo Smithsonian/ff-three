@@ -118,6 +118,7 @@ export default class GPUPicker
     {
         const viewport = event.viewport;
         camera = viewport.updateCamera(camera);
+        camera.layers.disable(1);
 
         const overrideMaterial = scene.overrideMaterial;
         scene.overrideMaterial = this.indexShader;
@@ -143,6 +144,8 @@ export default class GPUPicker
 
         scene.overrideMaterial = overrideMaterial;
 
+        camera.layers.enable(1);
+
         const buffer = this.pickBuffer;
         renderer.readRenderTargetPixels(pickTexture, 0, 0, 1, 1, buffer);
 
@@ -166,6 +169,7 @@ export default class GPUPicker
 
         const viewport = event.viewport;
         camera = viewport.updateCamera(camera);
+        camera.layers.disable(1);
 
         const overrideMaterial = scene.overrideMaterial;
         const shader = scene.overrideMaterial = this.positionShader;
@@ -189,6 +193,8 @@ export default class GPUPicker
         renderer.setClearColor(_color);
 
         scene.overrideMaterial = overrideMaterial;
+
+        camera.layers.enable(1);
 
         const buffer = this.pickBuffer;
 
@@ -220,6 +226,7 @@ export default class GPUPicker
 
         const viewport = event.viewport;
         camera = viewport.updateCamera(camera);
+        camera.layers.disable(1);
 
         const overrideMaterial = scene.overrideMaterial;
         scene.overrideMaterial = this.normalShader;
@@ -238,6 +245,8 @@ export default class GPUPicker
         renderer.setClearColor(_color);
 
         scene.overrideMaterial = overrideMaterial;
+
+        camera.layers.enable(1);
 
         const buffer = this.pickBuffer;
 
