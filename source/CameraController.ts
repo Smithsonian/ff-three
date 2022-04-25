@@ -176,7 +176,7 @@ export default class CameraController implements IManip
             offset.z = (_vec3b.z + size * fovFactor + _vec3a.z * 0.25 /* was 0.5 */);
         }
 
-        this.maxOffset.z = Math.max(this.maxOffset.z, offset.z + _vec3a.z * 4);
+        //this.maxOffset.z = Math.max(this.maxOffset.z, offset.z + _vec3a.z * 4);
     }
 
     /**
