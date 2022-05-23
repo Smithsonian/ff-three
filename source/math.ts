@@ -91,7 +91,7 @@ const math = {
     decomposeOrbitMatrix: function(matrix: Matrix4, orientationOut: Vector3, offsetOut: Vector3)
     {
         _euler.setFromRotationMatrix(matrix, "ZYX");
-        _euler.toVector3(orientationOut);
+        orientationOut.setFromEuler(_euler);
 
         _mat4.copy(matrix).invert();
         _vec4a.set(0, 0, 0, 1);
@@ -118,7 +118,7 @@ const math = {
         _euler.setFromQuaternion(_quat, "XYZ");
         _vec3a.toArray(posOut);
         _vec3b.toArray(scaleOut);
-        _euler.toVector3(_vec3a);
+        _vec3a.setFromEuler(_euler);
         _vec4a.multiplyScalar(baseMath.RAD2DEG);
         _vec3a.toArray(rotOut);
     }
