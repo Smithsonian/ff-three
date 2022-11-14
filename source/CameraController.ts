@@ -17,7 +17,8 @@ import math from "@ff/core/math";
 import {
     IManip,
     IPointerEvent,
-    ITriggerEvent
+    ITriggerEvent,
+    IKeyboardEvent
 } from "@ff/browser/ManipTarget";
 
 import threeMath from "./math";
@@ -111,6 +112,28 @@ export default class CameraController implements IManip
     {
         if (event.type === "wheel") {
             this.deltaWheel += math.limit(event.wheel, -1, 1);
+            return true;
+        }
+
+        return false;
+    }
+
+    onKeypress(event: IKeyboardEvent)
+    {
+        if(event.key === "ArrowUp" || event.key === "ArrowDown") {
+            const dir = event.key === "ArrowUp" ? -1 : 1;
+            this.deltaY = dir*20;
+
+            this.mode = event.shiftKey ? EManipMode.Pan : (event.ctrlKey ? EManipMode.Dolly : EManipMode.Orbit);
+            
+            return true;
+        }
+        else if(event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            const dir = event.key === "ArrowLeft" ? -1 : 1;
+            this.deltaX = dir*20;
+
+            this.mode = event.shiftKey ? EManipMode.Pan : EManipMode.Orbit;
+
             return true;
         }
 
@@ -219,7 +242,8 @@ export default class CameraController implements IManip
      */
     update(): boolean
     {
-        if (this.phase === EManipPhase.Off && this.deltaWheel === 0) {
+        if (this.phase === EManipPhase.Off && this.deltaWheel === 0
+            && this.deltaX === 0 && this.deltaY === 0) {
             return false;
         }
 
@@ -251,6 +275,13 @@ export default class CameraController implements IManip
                 this.mode = EManipMode.Off;
                 this.phase = EManipPhase.Off;
             }
+            return true;
+        }
+        else if(this.deltaX !== 0 || this.deltaY !== 0) {
+            this.updateByMode();
+            this.deltaX = 0;
+            this.deltaY = 0;
+            this.mode = EManipMode.Off;
             return true;
         }
 

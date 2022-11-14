@@ -17,6 +17,7 @@ import Publisher, { ITypedEvent } from "@ff/core/Publisher";
 
 import {
     IBaseEvent as IManipBaseEvent,
+    IKeyboardEvent,
     IPointerEvent as IManipPointerEvent,
     ITriggerEvent as IManipTriggerEvent
 } from "@ff/browser/ManipTarget";
@@ -403,6 +404,15 @@ export default class Viewport extends Publisher implements IViewportManip
     {
         if (this._controller) {
             return this._controller.onTrigger(event);
+        }
+
+        return false;
+    }
+
+    onKeyboard(event: IKeyboardEvent)
+    {
+        if (this._controller) {
+            return this._controller.onKeypress(event);
         }
 
         return false;
