@@ -11,12 +11,12 @@ varying vec3 vViewPosition;
 
 #include <common>
 
-// #include <uv_pars_vertex>
+//#include <uv_pars_vertex>
 // replaced with
 varying vec2 vUv;
 uniform mat3 uvTransform;
 
-#include <uv2_pars_vertex>
+//#include <uv2_pars_vertex>
 #include <displacementmap_pars_vertex>
 #include <envmap_pars_vertex>
 #include <color_pars_vertex>
@@ -29,11 +29,11 @@ uniform mat3 uvTransform;
 
 void main() {
 
-	// #include <uv_vertex>
+	#include <uv_vertex>
 	// replaced with
-	vUv = ( uvTransform * vec3( uv, 1 ) ).xy;
+	vUv = ( vec3( uv, 1 ) ).xy;
 
-	#include <uv2_vertex>
+	//#include <uv2_vertex>
 	#include <color_vertex>
 
 	#include <beginnormal_vertex>

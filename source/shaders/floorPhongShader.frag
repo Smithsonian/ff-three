@@ -16,7 +16,7 @@ uniform float opacity;
 // replaced with
 varying vec2 vUv;
 
-#include <uv2_pars_fragment>
+//#include <uv2_pars_fragment>
 #include <map_pars_fragment>
 #include <alphamap_pars_fragment>
 #include <aomap_pars_fragment>
@@ -72,7 +72,7 @@ void main() {
 	gl_FragColor = vec4(outgoingLight, mix(diffuseColor.a, 0.0, f));
 
 	#include <tonemapping_fragment>
-	#include <encodings_fragment>
+	#include <colorspace_fragment>
 	#include <fog_fragment>
 	#include <premultiplied_alpha_fragment>
 	#include <dithering_fragment>
