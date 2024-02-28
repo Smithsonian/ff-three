@@ -46,6 +46,11 @@ export default class GPUPicker
                         material.setIndex(object.id);
                     }
                 }
+                object.onAfterRender = function(r, s, c, g, material: IndexShader) {
+                    if (material.isIndexShader) {
+                        material.setIndex(0);
+                    }
+                }
             }
         };
 
@@ -62,6 +67,7 @@ export default class GPUPicker
         const unhookObject3D = object => {
             if ((object as any).material) {
                 object.onBeforeRender = null;
+                object.onAfterRender = null;
             }
         };
 
