@@ -15,6 +15,7 @@ import {
     Matrix4,
     Box3,
     Color,
+    AxesHelper
 } from "three";
 
 import { computeLocalBoundingBox } from "./helpers";
@@ -37,6 +38,7 @@ export interface IBracketProps
  */
 export default class Bracket extends LineSegments
 {
+    private axes :AxesHelper;
     static readonly defaultProps = {
         color: new Color("#ffd633"),
         length: 0.25
@@ -112,18 +114,27 @@ export default class Bracket extends LineSegments
 
         this.renderOrder = 1;
 
+        this.axes = new AxesHelper(1);
+        (this.axes.material as any).depthTest  = false;
+        this.axes.renderOrder = 1;
+        target.parent.add(this.axes);
+        target.add(this);
+
         this.onBeforeRender = () => {
-            target.updateMatrixWorld(false);
-            this.matrixWorld.copy(target.matrixWorld);
+            this.axes.scale.copy(new Vector3(1, 1, 1)).divide(target.parent.scale);
         }
     }
 
     dispose()
     {
+
         if (this.parent) {
             this.parent.remove(this);
         }
-
+        if(this.axes.parent){
+            this.axes.parent.remove(this.axes);
+        }
+        this.axes.dispose();
         this.geometry.dispose();
     }
 
