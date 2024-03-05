@@ -121,7 +121,9 @@ export default class Bracket extends LineSegments
         target.add(this);
 
         this.onBeforeRender = () => {
-            this.axes.scale.copy(new Vector3(1, 1, 1)).divide(target.parent.scale);
+            if(target.parent){
+                this.axes.scale.copy(new Vector3(1, 1, 1)).divide(target.parent.scale);
+            }
         }
     }
 
