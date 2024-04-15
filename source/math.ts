@@ -36,7 +36,9 @@ const math = {
     QUARTER_PI: 0.78539816339744830961566084581988,
     DEG2RAD: 0.01745329251994329576923690768489,
     RAD2DEG: 57.295779513082320876798154814105,
-
+    /**
+     * one-step orbit matrix composition when the pivot point is (0, 0, 0). 
+     */
     composeOrbitMatrix: function(orientation: Vector3, offset: Vector3, result?: Matrix4): Matrix4
     {
         const pitch = orientation.x;
